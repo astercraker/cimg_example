@@ -5,7 +5,7 @@ using namespace std;
 #include <string>
 using namespace cimg_library;
 int main() {
-    CImg<unsigned char> src("icon.png");
+    CImg<unsigned char> src("icon.jpg");
     int width = src.width();
     int height = src.height();
     cout << width << "x" << height << endl;
