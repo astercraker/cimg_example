@@ -1,50 +1,25 @@
 #include <iostream>
-#include <vector>
+using namespace std;
 
-extern "C" {
-#define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
-}
-
-// Loads as RGBA... even if file is only RGB
-// Feel free to adjust this if you so please, by changing the 4 to a 0.
-bool load_image(std::vector<unsigned char>& image, const std::string& filename, int& x, int&y)
-{
-    int n;
-    unsigned char* data = stbi_load(filename.c_str(), &x, &y, &n, 4);
-    if (data != nullptr)
-    {
-        image = std::vector<unsigned char>(data, data + x * y * 4);
-    }
-    stbi_image_free(data);
-    return (data != nullptr);
-}
-
+#include "CImg.h"
+#include <string>
+using namespace cimg_library;
 int main() {
-    std::string filename = "/home/astercraker/projects/c++/test_image/container.jpg";
-
-    int width, height;
-    std::vector<unsigned char> image;
-    bool success = load_image(image, filename, width, height);
-    if (!success) {
-        std::cout << "Error loading image\n";
-        return 1;
+    CImg<unsigned char> src("icon.png");
+    int width = src.width();
+    int height = src.height();
+    cout << width << "x" << height << endl;
+    int counter = 0;
+    for (int r = 0; r < height; r++){
+        for (int c = 0; c < width; c++){
+            counter += 1;
+            cout << "counter: " << counter
+                 << " (" << r << "," << c << ") ="
+                 << " R: " << (int)src(c,r,0,0)
+                 << " G: " << (int)src(c,r,0,1)
+                 << " B: " << (int)src(c,r,0,2) << endl;
+        }
     }
-
-    std::cout << "Image width = " << width << '\n';
-    std::cout << "Image height = " << height << '\n';
-
-    const size_t RGBA = 4;
-
-    int x = 3;
-    int y = 4;
-    size_t index = RGBA * (y * width + x);
-    std::cout << "RGBA pixel @ (x=3, y=4): "
-              << static_cast<int>(image[index + 0]) << " "
-              << static_cast<int>(image[index + 1]) << " "
-              << static_cast<int>(image[index + 2]) << " "
-              << static_cast<int>(image[index + 3]) << '\n';
-
+    cout << "counter: " << counter;
     return 0;
 }
-
