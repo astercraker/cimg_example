@@ -14,3 +14,7 @@ Primero intenta correr el archivo de codigo antes de instalar los scripts de paq
   
   ./test
 
+  Para imagenes .png
+
+  g++ -Wall -o test test.cpp -Dcimg_use_png -lpng -lpthread -lX11
+

@@ -5,11 +5,13 @@ using namespace std;
 #include <string>
 using namespace cimg_library;
 int main() {
-    CImg<unsigned char> src("icon.jpg");
+    CImg<unsigned char> src("icon.png");
+    int canales = src.spectrum();
     int width = src.width();
     int height = src.height();
-    cout << width << "x" << height << endl;
+    cout << width << "x" << height << " canales: " << canales << endl;
     int counter = 0;
+    /*
     for (int r = 0; r < height; r++){
         for (int c = 0; c < width; c++){
             counter += 1;
@@ -20,6 +22,7 @@ int main() {
                  << " B: " << (int)src(c,r,0,2) << endl;
         }
     }
+    */
     cout << "counter: " << counter;
     return 0;
 }
